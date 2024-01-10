@@ -1,0 +1,34 @@
+SELECT * FROM customers ORDER BY contactLastName ASC;
+
+SELECT * FROM customers ORDER BY contactLastName DESC, contactFirstName ASC;
+
+SELECT DISTINCT contactLastName FROM customers;
+
+SELECT contactFirstName,contactLastName FROM customers WHERE state = 'CA' AND country = 'USA' AND creditLimit > 100000;
+
+SELECT productCode, productName FROM products WHERE buyPrice NOT BETWEEN 20 AND 100;
+
+CREATE TABLE status (id int AUTO_INCREMENT primary key,noofProducts int,noofCustomers int,noofOrders int);
+INSERT INTO status (noofProducts, noofCustomers, noofOrders) SELECT COUNT(p.productCode), COUNT(c.customerNumber), COUNT(o.orderNumber) FROM products p, customers c, orders o;
+
+UPDATE employees SET lastName = 'Hill' , email = 'mary.hill@classicmodelcars.com' WHERE employeeNumber = 1056;
+
+SELECT orders.orderNumber, orders.status,sum(orderdetails.quantityOrdered * orderdetails.priceEach) as totalsales FROM orders INNER JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber GROUP BY orderNumber ;
+
+select customers.customerNumber, customers.contactFirstName as customerFirstName, customers.contactLastName as contactlastName , customers.city, employees.firstName as employeeResponsible, sum(payments.amount) as paymentAmount from payments JOIN customers on payments.customerNumber = customers.customerNumber JOIN employees on customers.salesRepEmployeeNumber=employees.employeeNumber group by customerNumber HAVING paymentAmount > 50000;
+
+SELECT c.customerNumber, c.customerName FROM customers c INNER JOIN payments p ON c.customerNumber = p.customerNumber WHERE p.paymentDate = '2004-09-19';
+
+CREATE VIEW customer_list AS SELECT contactFirstName as customerfrstname, contactLastName as customerlastname, addressLine1, city, country FROM customers;
+select * from customer_list;
+
+CREATE PROCEDURE maxSalesCustomer
+    @customerID INT
+AS
+BEGIN
+    SELECT * FROM customers WHERE customerID = @customerID;
+END;
+
+
+
+

@@ -1,0 +1,48 @@
+asp .net core web api>>
+create pjct
+
+view => terminal
+
+dotnet tool install --global dotnet-ef         === to install
+
+==to install pckg
+dotnet add package Microsoft.EntityFrameworkCore.Design 
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer 
+
+create model=create a clss inside it
+
+from main create new foldr DATA.
+we want to create db context-create class inside DATA(appdbcontext inheritd from DbContext)=usimg MIcrosoft.EntityFrameworkCore
+
+using DB contxt-we commnct with db
+dbSet from DB contxt-we mang data
+
+connctn strng rqrd to cnct with db context
+
+to form connctn string-
+view-set servr objct expllrrer-add sqlservr-locl-trustd sevr certfc make true-select db-connect
+
+in appsettngs.json=> add connection string
+
+we will get connctn strng from properties of db(properties db rightclick adikumbe kitum)
+
+IN PGM.CS = builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Employee_API_CRUDContext")))    //to estblsh cnnctn btwn pgm and db
+
+flow = contrl > servc > databs layer(so servicil poi dbcontxt instnc bind cheynam)
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+sql server magmnt studio
+In DB, create NEW db
+
+identity specifictn =yes kodka = auto incrmnt
+default value or binding = NEWID()
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+TO CHECK WHETHER THE TABLE IS THERE OR NOT
+> use CodeFirstDemo;
+SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE';
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

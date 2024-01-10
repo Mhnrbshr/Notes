@@ -1,0 +1,52 @@
+Scrum involves fixed-length iterations (sprints)
+Helps to work collaboratively on complex projects. 
+
+integrates different departments and functions within a company into a unified system.-- ERP
+
+Relational Databases-Use tables to organize data with predefined relationships between them. Eg: MySQL 
+NoSQL Databases - Store and retrieve data without a fixed schema
+
+ORM, or Object-Relational Mapping, is like a language translator between databases and computer programs. It helps software developers talk to databases using their programming code more easily. Instead of using complex database commands, they can use familiar programming language objects. This simplifies database interactions and reduces the need for complex SQL queries. 
+
+levls>>>>>>
+Unit Testing:
+
+Tests individual components or functions to ensure they work as expected in isolation.
+Integration Testing:
+
+Checks how different components or modules work together as a group to verify their interactions.
+System Testing:
+
+Evaluates the entire system's functionality to ensure it meets specified requirements and behaves as expected.
+Acceptance Testing:
+
+Validates that the system meets business requirements and is ready for use by end-users.
+
+technqs>>>>>
+Manual Testing:
+
+Human testers execute test cases without using automation tools.
+Automated Testing:
+
+Testing performed with the help of automation tools and scripts to enhance efficiency.
+Black Box Testing:
+
+Evaluates the functionality of a system without examining its internal code.
+White Box Testing:
+
+Examines the internal logic and structure of the system's code.
+Regression Testing:
+
+Ensures that recent code changes haven't negatively impacted existing functionalities.
+Performance Testing:
+
+Evaluates the system's responsiveness, scalability, and overall performance.
+Security Testing:
+
+Identifies vulnerabilities and ensures the system is secure from potential threats.
+
+
+
+
+>>>>>>>>>>>>
+mock layers = Simulating a database with a mock to test a specific module without affecting the actual database.

@@ -1,0 +1,1233 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database bank_db;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use bank_db;
+Database changed
+mysql> create table customer(customer_id varchar(10) not null primary key, customer_firstname varchar(15) not null,customer_lastname varchar(15),address varchar(20) not null,phnumber bigint not null,adharcard_no bigint not null);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into customer values('CSS0000001','Parul','Gandhi','Delhi',7863452678,222233334444);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | Delhi   | 7863452678 | 222233334444 |
++-------------+--------------------+-------------------+---------+------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> insert into customer values('CSS00000002','Chitresh','Kumar','Mumbai',7863234678,123433334444);
+ERROR 1406 (22001): Data too long for column 'customer_id' at row 1
+mysql> insert into customer values('CSS0000002','Chitresh','Kumar','Mumbai',7863234678,123433334444);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('CSS0000003','Nisha','Shankar','Mumbai',7812234678,123433674444);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('CSS0000004','Abhishek','Dutta','Mumbai',7812234612,123433677844);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('CSS0000005','Shankar','Nair','Mumbai',7342234612,453433677844);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> create table product(product_code varchar(10) not null primary key, product_name varchar(15) not null);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> drop table product;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table product(product_code varchar(10) not null primary key, product_name varchar(30) not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into product values('PC0000001','Savings Account');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into product values('PC0000002','Current Account');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into product values('PC0000003','Rural Account');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into product values('PC0000004','Women Savings Account');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into product values('PC0000005','Loan Account');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values('PC0000006','Max Savings Account');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from product;
++--------------+-----------------------+
+| product_code | product_name          |
++--------------+-----------------------+
+| PC0000001    | Savings Account       |
+| PC0000002    | Current Account       |
+| PC0000003    | Rural Account         |
+| PC0000004    | Women Savings Account |
+| PC0000005    | Loan Account          |
+| PC0000006    | Max Savings Account   |
++--------------+-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> create table account(account_no varchar(10) not null primary key, customer_id varchar(10) not null,product_code varchar(10) not null,foreign key(customer_id) refrences customer(customer_id),foreign key(product_code) refrences product(product_code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'refrences customer(customer_id),foreign key(product_code) refrences product(prod' at line 1
+mysql> create table account(account_no varchar(10) not null primary key, customer_id varchar(10) not null,product_code varchar(10) not null,foreign key(customer_id) references customer(customer_id),foreign key(product_code) references product(product_code));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into account values('ACC0000001','CSS0000001','PC0000001');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into account values('ACC0000002','CSS0000002','PC0000002');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into account values('ACC0000003','CSS0000003','PC0000003');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into account values('ACC0000004','CSS0000004','PC0000004');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into account values('ACC0000005','CSS0000005','PC0000005');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from account;
++------------+-------------+--------------+
+| account_no | customer_id | product_code |
++------------+-------------+--------------+
+| ACC0000001 | CSS0000001  | PC0000001    |
+| ACC0000002 | CSS0000002  | PC0000002    |
+| ACC0000003 | CSS0000003  | PC0000003    |
+| ACC0000004 | CSS0000004  | PC0000004    |
+| ACC0000005 | CSS0000005  | PC0000005    |
++------------+-------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> drop table account;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table account(account_no varchar(10) not null primary key, customer_id varchar(10) not null,product_code varchar(10) not null,foreign key(customer_id) refrences customer(customer_id),foreign key(product_code) refrences product(product_code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'refrences customer(customer_id),foreign key(product_code) refrences product(prod' at line 1
+mysql> create table account(account_no varchar(10) not null primary key, customer_id varchar(10) not null,product_code varchar(10) not null,foreign key(customer_id) references customer(customer_id),foreign key(product_code) references product(product_code));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into account values('ACC0000001','CSS0000001','PC0000001');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into account values('ACC0000002','CSS0000002','PC0000002');x
+Query OK, 1 row affected (0.01 sec)
+
+    -> ^C
+mysql> insert into account values('ACC0000002','CSS0000002','PC0000002');
+ERROR 1062 (23000): Duplicate entry 'ACC0000002' for key 'account.PRIMARY'
+mysql> insert into account values('ACC0000003','CSS0000003','PC0000004');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into account values('ACC0000004','CSS0000004','PC0000003');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into account values('ACC0000005','CSS0000005','PC0000005');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from account;
++------------+-------------+--------------+
+| account_no | customer_id | product_code |
++------------+-------------+--------------+
+| ACC0000001 | CSS0000001  | PC0000001    |
+| ACC0000002 | CSS0000002  | PC0000002    |
+| ACC0000003 | CSS0000003  | PC0000004    |
+| ACC0000004 | CSS0000004  | PC0000003    |
+| ACC0000005 | CSS0000005  | PC0000005    |
++------------+-------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> create table service(service_code varchar(20) not null primary key ,service_name varchar(20) not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into service values('SC00000001','Cash Deposit');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into service values('SC00000002','Cash Withdrawl');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into service values('SC00000003','ATM Deposit');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into service values('SC00000004','ATM Withdrawl');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into service values('SC00000005','Cheque Book');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from service;
++--------------+----------------+
+| service_code | service_name   |
++--------------+----------------+
+| SC00000001   | Cash Deposit   |
+| SC00000002   | Cash Withdrawl |
+| SC00000003   | ATM Deposit    |
+| SC00000004   | ATM Withdrawl  |
+| SC00000005   | Cheque Book    |
++--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> create table productservicemapping(mapping_id varchar(20) not null primary key ,productCode varchar(20) not null,serviceCode varchar(15) not null);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> drop table productservicemapping;
+Query OK, 0 rows affected (0.03 sec)
+mysql> create table productservicemapping(mapping_id varchar(20) not null primary key ,productCode varchar(20) not null,serviceCode varchar(15) not null,foreign key(productCode) references product(product_code),foreign key(serviceCode) references service(service_code));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into productservicemapping values('MC0000001','PC0000001','SC00000001');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from productservicemapping;
++------------+-------------+-------------+
+| mapping_id | productCode | serviceCode |
++------------+-------------+-------------+
+| MC0000001  | PC0000001   | SC00000001  |
++------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> insert into productservicemapping values('MC0000002','PC0000001','SC00000002');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into productservicemapping values('MC0000003','PC0000001','SC00000004');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> Insert into productservicemapping values('MC0000004','PC0000002','SC0000001');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> Insert into productservicemapping values('MC0000005','PC0000002','SC0000002');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> Insert into productservicemapping values('MC0000006','PC0000002','SC0000004');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> Insert into productservicemapping values('MC0000007','PC0000002','SC0000005');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> Insert into productservicemapping values('MC0000008','PC0000003','SC0000001');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> Insert into productservicemapping values('MC0000006','PC0000002','SC0000004'); ^C
+mysql> select * from productservicemapping;
++------------+-------------+-------------+
+| mapping_id | productCode | serviceCode |
++------------+-------------+-------------+
+| MC0000001  | PC0000001   | SC00000001  |
+| MC0000002  | PC0000001   | SC00000002  |
+| MC0000003  | PC0000001   | SC00000004  |
++------------+-------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into productservicemapping values('MC0000004','PC0000002','SC0000001');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`bank_db`.`productservicemapping`, CONSTRAINT `productservicemapping_ibfk_2` FOREIGN KEY (`serviceCode`) REFERENCES `service` (`service_code`))
+mysql> insert into productservicemapping values('MC0000004','PC0000002','SC00000001');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into productservicemapping values('MC0000005','PC0000002','SC00000002');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into productservicemapping values('MC0000006','PC0000002','SC00000004');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into productservicemapping values('MC0000007','PC0000002','SC00000005');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into productservicemapping values('MC0000008','PC0000002','SC00000005');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into productservicemapping values('MC0000009','PC0000003','SC00000002');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from productservicemapping;
++------------+-------------+-------------+
+| mapping_id | productCode | serviceCode |
++------------+-------------+-------------+
+| MC0000001  | PC0000001   | SC00000001  |
+| MC0000002  | PC0000001   | SC00000002  |
+| MC0000003  | PC0000001   | SC00000004  |
+| MC0000004  | PC0000002   | SC00000001  |
+| MC0000005  | PC0000002   | SC00000002  |
+| MC0000006  | PC0000002   | SC00000004  |
+| MC0000007  | PC0000002   | SC00000005  |
+| MC0000008  | PC0000002   | SC00000005  |
+| MC0000009  | PC0000003   | SC00000002  |
++------------+-------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> update productservicemapping set productCode='PC0000003' where mapping_id='MC0000008';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from productservicemapping;
++------------+-------------+-------------+
+| mapping_id | productCode | serviceCode |
++------------+-------------+-------------+
+| MC0000001  | PC0000001   | SC00000001  |
+| MC0000002  | PC0000001   | SC00000002  |
+| MC0000003  | PC0000001   | SC00000004  |
+| MC0000004  | PC0000002   | SC00000001  |
+| MC0000005  | PC0000002   | SC00000002  |
+| MC0000006  | PC0000002   | SC00000004  |
+| MC0000007  | PC0000002   | SC00000005  |
+| MC0000008  | PC0000003   | SC00000005  |
+| MC0000009  | PC0000003   | SC00000002  |
++------------+-------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> create table transaction(transaction_code varchar(20) not null primary key,product_code varchar(20) not null,service_code varchar(20) not null,dateoftransaction  not null,volume bigint not null,foreign key(product_code) references product(product_code),foreign key(product_code) references service(service_code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null,volume bigint not null,foreign key(product_code) references product(pro' at line 1
+mysql> create table transaction(transaction_code varchar(20) not null primary key,product_code varchar(20) not null,service_code varchar(20) not null,dateoftransaction varchar(30) not null,volume bigint not null,foreign key(product_code) references product(product_code),foreign key(service_code) references service(service_code));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql>
+
+
+
+mysql> insert into transaction values('TC000000','PC0000001',DATE_FORMAT('2021-11-16 19:32:18','%a %b %e %T PST %Y'),60000000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into transaction values('TC000000','PC0000001','2021-11-16 19:32:18',60000000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> DROP TABLE transaction;
+Query OK, 0 rows affected (0.04 sec)                                                                                            mysql> create table transaction(transaction_code varchar(20) not null primary key,product_code varchar(20) not null,service_code varchar(20) not null,dateoftransaction datetime not null,volume bigint not null,foreign key(product_code) references product(product_code),foreign key(service_code) references service(service_code));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into transaction values('TC000000','PC0000001','SC00000001','2021-11-16 19:32:18',60000000);
+Query OK, 1 row affected (0.02 sec)                                                                                             mysql> insert into transaction values('TC000001','PC0000001','SC00000002','2021-12-28 21:21:30',87654433);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into transaction values('TC000003','PC0000001','SC00000004','2021-12-27 18:16:34',788888888);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into transaction values('TC000003','PC0000001','SC00000004','2021-12-27 15:16:34',7986554);
+ERROR 1062 (23000): Duplicate entry 'TC000003' for key 'transaction.PRIMARY'
+mysql> DROP TABLE transaction;
+Query OK, 0 rows affected (0.04 sec)                                                                                            mysql> create table transaction(transaction_code varchar(20) not null primary key,product_code varchar(20) not null,service_code varchar(20) not null,dateoftransaction varchar(30) not null,volume bigint not null,foreign key(product_code) references product(product_code),foreign key(service_code) references service(service_code));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> DROP TABLE transaction;
+Query OK, 0 rows affected (0.05 sec)                                                                                            mysql> create table transaction(transaction_code varchar(10) not null primary key, product_code varchar(10) not null, service_code varchar(10) not null, dateOfTransaction timestamp not null, volume bigint not null, foreign key(product_code) references product(product_code), foreign key(service_code) references service(service_code));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into transaction values('TC000001','PC0000001','SC00000001','2021-11-16 19:32:18',60000000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into transaction values('TC000002','PC0000001','SC00000002','2021-12-28 21:21:30',87654433);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transaction values('TC000003','PC0000001','SC00000004','2021-12-29 18:16:34',788888888);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transaction values('TC000004','PC0000002','SC00000001','2021-12-27 15:16:34',7986554);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into transaction values('TC000005','PC0000002','SC00000002','2021-11-16 23:10:49',366666666);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into transaction values('TC000006','PC0000003','SC00000002','2021-11-18 13:52:18',608654400);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *,DATE_FORMAT(dateOfTransaction, '%a %b %e %T PST %Y') AS formatted_date from transaction;
++------------------+--------------+--------------+---------------------+-----------+------------------------------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    | formatted_date               |
++------------------+--------------+--------------+---------------------+-----------+------------------------------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 | Tue Nov 16 19:32:18 PST 2021 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 | Tue Dec 28 21:21:30 PST 2021 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 | Wed Dec 29 18:16:34 PST 2021 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 | Mon Dec 27 15:16:34 PST 2021 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 | Tue Nov 16 23:10:49 PST 2021 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 | Thu Nov 18 13:52:18 PST 2021 |
++------------------+--------------+--------------+---------------------+-----------+------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from transaction;
++------------------+--------------+--------------+---------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    |
++------------------+--------------+--------------+---------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 |
++------------------+--------------+--------------+---------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select transaction_code,product_code,service_code,DATE_FORMAT(dateOfTransaction, '%a %b %e %T PST %Y') AS dateOfTransaction,volume from transaction;
++------------------+--------------+--------------+------------------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction            | volume    |
++------------------+--------------+--------------+------------------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | Tue Nov 16 19:32:18 PST 2021 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | Tue Dec 28 21:21:30 PST 2021 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | Wed Dec 29 18:16:34 PST 2021 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | Mon Dec 27 15:16:34 PST 2021 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | Tue Nov 16 23:10:49 PST 2021 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | Thu Nov 18 13:52:18 PST 2021 | 608654400 |
++------------------+--------------+--------------+------------------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table customer add column sex char(1) default 'M' after customer_lastname;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | M    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | M    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update customer set sex='F' where customer_id='CSS0000003';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | M    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> update customer set sex='F' where customer_id='CSS0000001';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer order by customer_firstname desc;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer where address = 'Mumbai';
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where address in ('Mumbai','Delhi');
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_firstname like 'A%';
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select max(volume) from transaction;
++-------------+
+| max(volume) |
++-------------+
+|   788888888 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from transaction;
++------------------+--------------+--------------+---------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    |
++------------------+--------------+--------------+---------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 |
++------------------+--------------+--------------+---------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select max(volume) from transaction;
++-------------+
+| max(volume) |
++-------------+
+|   788888888 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select product_code,service_code from transaction where volume =(max(volume) from transaction);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from transaction)' at line 1
+mysql> select product_code,service_code from transaction where volume =(select (max(volume) from transaction);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from transaction)' at line 1
+mysql> select product_code,service_code from transaction where volume =(select max(volume) from transaction);
++--------------+--------------+
+| product_code | service_code |
++--------------+--------------+
+| PC0000001    | SC00000004   |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create view productdetails as select product_code,service_code from transaction where volume = (select max(volume) from transaction);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from productdetails;
++--------------+--------------+
+| product_code | service_code |
++--------------+--------------+
+| PC0000001    | SC00000004   |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from account;
++------------+-------------+--------------+
+| account_no | customer_id | product_code |
++------------+-------------+--------------+
+| ACC0000001 | CSS0000001  | PC0000001    |
+| ACC0000002 | CSS0000002  | PC0000002    |
+| ACC0000003 | CSS0000003  | PC0000004    |
+| ACC0000004 | CSS0000004  | PC0000003    |
+| ACC0000005 | CSS0000005  | PC0000005    |
++------------+-------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++--------------+-----------------------+
+| product_code | product_name          |
++--------------+-----------------------+
+| PC0000001    | Savings Account       |
+| PC0000002    | Current Account       |
+| PC0000003    | Rural Account         |
+| PC0000004    | Women Savings Account |
+| PC0000005    | Loan Account          |
+| PC0000006    | Max Savings Account   |
++--------------+-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> select customer.customer_firstname, account.account_no from customer inner join account on customer.customer_id - account.customer_id;
+Empty set, 50 warnings (0.00 sec)
+
+mysql> select customer.customer_firstname, account.account_no from customer inner join account on customer.customer_id = account.customer_id;
++--------------------+------------+
+| customer_firstname | account_no |
++--------------------+------------+
+| Parul              | ACC0000001 |
+| Chitresh           | ACC0000002 |
+| Nisha              | ACC0000003 |
+| Abhishek           | ACC0000004 |
+| Shankar            | ACC0000005 |
++--------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into table customer values('CSS0000006','Ashiq','Cherian','M','India','9876543210','132453756763');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table customer values('CSS0000006','Ashiq','Cherian','M','India','9876543210','1' at line 1
+mysql> insert into customer values('CSS0000006','Ashiq','Cherian','M','India','9876543210','132453756763');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000006  | Ashiq              | Cherian           | M    | India   | 9876543210 | 132453756763 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select customer.customer_firstname, account.account_no from customer left join account on customer.customer_id = account.customer_id;
++--------------------+------------+
+| customer_firstname | account_no |
++--------------------+------------+
+| Parul              | ACC0000001 |
+| Chitresh           | ACC0000002 |
+| Nisha              | ACC0000003 |
+| Abhishek           | ACC0000004 |
+| Shankar            | ACC0000005 |
+| Ashiq              | NULL       |
++--------------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer;
+ERROR 2013 (HY000): Lost connection to MySQL server during query
+No connection. Trying to reconnect...
+Connection id:    19
+Current database: bank_db
+
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000006  | Ashiq              | Cherian           | M    | India   | 9876543210 | 132453756763 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+6 rows in set (0.06 sec)
+
+mysql> select * from product;
++--------------+-----------------------+
+| product_code | product_name          |
++--------------+-----------------------+
+| PC0000001    | Savings Account       |
+| PC0000002    | Current Account       |
+| PC0000003    | Rural Account         |
+| PC0000004    | Women Savings Account |
+| PC0000005    | Loan Account          |
+| PC0000006    | Max Savings Account   |
++--------------+-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from account;
++------------+-------------+--------------+
+| account_no | customer_id | product_code |
++------------+-------------+--------------+
+| ACC0000001 | CSS0000001  | PC0000001    |
+| ACC0000002 | CSS0000002  | PC0000002    |
+| ACC0000003 | CSS0000003  | PC0000004    |
+| ACC0000004 | CSS0000004  | PC0000003    |
+| ACC0000005 | CSS0000005  | PC0000005    |
++------------+-------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from transaction;
++------------------+--------------+--------------+---------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    |
++------------------+--------------+--------------+---------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 |
++------------------+--------------+--------------+---------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from service;
++--------------+----------------+
+| service_code | service_name   |
++--------------+----------------+
+| SC00000001   | Cash Deposit   |
+| SC00000002   | Cash Withdrawl |
+| SC00000003   | ATM Deposit    |
+| SC00000004   | ATM Withdrawl  |
+| SC00000005   | Cheque Book    |
++--------------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from productservicemapping;
++------------+-------------+-------------+
+| mapping_id | productCode | serviceCode |
++------------+-------------+-------------+
+| MC0000001  | PC0000001   | SC00000001  |
+| MC0000002  | PC0000001   | SC00000002  |
+| MC0000003  | PC0000001   | SC00000004  |
+| MC0000004  | PC0000002   | SC00000001  |
+| MC0000005  | PC0000002   | SC00000002  |
+| MC0000006  | PC0000002   | SC00000004  |
+| MC0000007  | PC0000002   | SC00000005  |
+| MC0000008  | PC0000003   | SC00000005  |
+| MC0000009  | PC0000003   | SC00000002  |
++------------+-------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, product.product_name FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN product ON account.product_code = product.product_code WHERE product.product_name = 'Savings';
+Empty set (0.00 sec)
+
+mysql> SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, product.product_name FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN product ON account.product_code = product.product_code WHERE product.product_name = 'Savings Account';
++-------------+--------------------+-------------------+-----------------+
+| customer_id | customer_firstname | customer_lastname | product_name    |
++-------------+--------------------+-------------------+-----------------+
+| CSS0000001  | Parul              | Gandhi            | Savings Account |
++-------------+--------------------+-------------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, service.service_name FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN transaction ON account.product_code = transaction.product_code
+INNER JOIN service ON transaction.service_code = service.service_code;
++-------------+--------------------+-------------------+----------------+
+| customer_id | customer_firstname | customer_lastname | service_name   |
++-------------+--------------------+-------------------+----------------+
+| CSS0000001  | Parul              | Gandhi            | Cash Deposit   |
+| CSS0000001  | Parul              | Gandhi            | Cash Withdrawl |
+| CSS0000001  | Parul              | Gandhi            | ATM Withdrawl  |
+| CSS0000002  | Chitresh           | Kumar             | Cash Deposit   |
+| CSS0000002  | Chitresh           | Kumar             | Cash Withdrawl |
+| CSS0000004  | Abhishek           | Dutta             | Cash Withdrawl |
++-------------+--------------------+-------------------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, service.service_name FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN transaction ON account.product_code = transaction.product_code INNER JOIN service ON transaction.service_code = service.service_code WHERE customer.customer_firstname ='Parul';;
++-------------+--------------------+-------------------+----------------+
+| customer_id | customer_firstname | customer_lastname | service_name   |
++-------------+--------------------+-------------------+----------------+
+| CSS0000001  | Parul              | Gandhi            | Cash Deposit   |
+| CSS0000001  | Parul              | Gandhi            | Cash Withdrawl |
+| CSS0000001  | Parul              | Gandhi            | ATM Withdrawl  |
++-------------+--------------------+-------------------+----------------+
+3 rows in set (0.00 sec)
+
+ERROR:
+No query specified
+
+mysql> SELECT product.product_name FROM product INNER JOIN transaction ON product.product_code = transaction.product_code WHERE (SELECT MAX(volume) FROM transaction);
++-----------------+
+| product_name    |
++-----------------+
+| Savings Account |
+| Savings Account |
+| Savings Account |
+| Current Account |
+| Current Account |
+| Rural Account   |
++-----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT product.product_code, product.product_name, transaction.volume FROM product INNER JOIN transaction ON product.product_code = transaction.product_code WHERE transaction.volume = (SELECT MAX(volume) FROM transaction);
++--------------+-----------------+-----------+
+| product_code | product_name    | volume    |
++--------------+-----------------+-----------+
+| PC0000001    | Savings Account | 788888888 |
++--------------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> show variables where variable_name = 'autocommit';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| autocommit    | ON    |
++---------------+-------+
+1 row in set (0.01 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000006  | Ashiq              | Cherian           | M    | India   | 9876543210 | 132453756763 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from customer where customer_id = 'CSS0000001';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`bank_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`))
+mysql> delete from customer where customer_id = 'CSS0000006';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> set autocommit = off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into customer values('CSS0000006','Ashiq','Nair','delhi',7342234612,453433677844);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into customer values('CSS0000006','Ashiq','Nair','delhi','M',7342234612,453433677844);
+ERROR 1406 (22001): Data too long for column 'sex' at row 1
+mysql> insert into customer values('CSS0000006','Ashiq','Nair','M','delhi',7342234612,453433677844);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000006  | Ashiq              | Nair              | M    | delhi   | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from customer where customer_id = 'CSS0000006';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> set autocommit = on;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into customer values('CSS0000006','Ashiq','Nair','M','delhi',7342234612,453433677844);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> set autocommit = off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
+| CSS0000006  | Ashiq              | Nair              | M    | delhi   | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from customer where customer_id = 'CSS0000006';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> set autocommit = on;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure getAllProducts() select * from product;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call getAllProducts();
++--------------+-----------------------+
+| product_code | product_name          |
++--------------+-----------------------+
+| PC0000001    | Savings Account       |
+| PC0000002    | Current Account       |
+| PC0000003    | Rural Account         |
+| PC0000004    | Women Savings Account |
+| PC0000005    | Loan Account          |
+| PC0000006    | Max Savings Account   |
++--------------+-----------------------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure getAllCustomers() select customer_firstname,customer_secondname,address from customer order by customer_firstname;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call getAllCustomers();
+ERROR 1054 (42S22): Unknown column 'customer_secondname' in 'field list'
+mysql> create procedure getAllCustomers() select customer_firstname,customer_lastname,address from customer order by customer_firstname;
+ERROR 1304 (42000): PROCEDURE getAllCustomers already exists
+mysql> delete procedure getAllCustomers();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'procedure getAllCustomers()' at line 1
+mysql> drop procedure getAllCustomers();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> drop procedure getAllCustomers;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure getAllCustomers() select customer_firstname,customer_lastname,address from customer order by customer_firstname;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call getAllCustomers();
++--------------------+-------------------+---------+
+| customer_firstname | customer_lastname | address |
++--------------------+-------------------+---------+
+| Abhishek           | Dutta             | Mumbai  |
+| Chitresh           | Kumar             | Mumbai  |
+| Nisha              | Shankar           | Mumbai  |
+| Parul              | Gandhi            | Delhi   |
+| Shankar            | Nair              | Mumbai  |
++--------------------+-------------------+---------+
+5 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure citycount (in city varchar(20) , out countofp int) select count(*) into countofp from customer where address=city;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call citycount('Mumbai',@counofp);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select @countofp;
++----------------------+
+| @countofp            |
++----------------------+
+| NULL                 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> call citycount('Mumbai',@countofp);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @countofp;
++-----------+
+| @countofp |
++-----------+
+|         4 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> create procedure savingsAccountCustomers() select customer.customer_id,customer.customer_firstname,customer.customer_lastname, product.product_name FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN product ON account.product_code = product.product_code WHERE product.product_name = 'Savings Account';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call savingsAccountCustomers();
++-------------+--------------------+-------------------+-----------------+
+| customer_id | customer_firstname | customer_lastname | product_name    |
++-------------+--------------------+-------------------+-----------------+
+| CSS0000001  | Parul              | Gandhi            | Savings Account |
++-------------+--------------------+-------------------+-----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop procedure savingsAccountCustomers;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure savingsAccountCustomers() select count(*) as noOfCustomersWhoHasSA FROM customer INNER JOIN account ON customer.customer_id = account.customer_id INNER JOIN product ON account.product_code = product.product_code WHERE product.product_name = 'Savings Account';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call savingsAccountCustomers();
++-----------------------+
+| noOfCustomersWhoHasSA |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create procedure mumbaiCustomers(in city varchar(20)) select * from customer where address=city;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call citycount('Mumbai');
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE bank_db.citycount; expected 2, got 1
+mysql> call mumbaiCustomers('Mumbai');
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+| CSS0000002  | Chitresh           | Kumar             | M    | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+---------+------------+--------------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select time(now());
++-------------+
+| time(now()) |
++-------------+
+| 10:10:01    |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select day(curdate());
++----------------+
+| day(curdate()) |
++----------------+
+|             21 |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> alter table customer add age int after sex default = 56;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default = 56' at line 1
+mysql> alter table customer add column age int default 56 after sex;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer add column age int default '56' after sex;
+ERROR 1060 (42S21): Duplicate column name 'age'
+mysql> alter table customer add column age int default (56) after sex;
+ERROR 1060 (42S21): Duplicate column name 'age'
+mysql> delimiter //
+mysql> create function countof(age int)
+    -> return int
+    -> deterministic
+    -> begin
+    -> declare countofp int;
+    -> select count(age) into countofp from customer where customer.age = age;
+    -> return(countofp);
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return int
+deterministic
+begin
+declare countofp int;
+select count(age) into coun' at line 2
+mysql> create function countof(age int)
+    -> ^C
+mysql> ^C
+mysql> delimiter //
+mysql> create function countof(age int)
+    -> return int
+    -> deterministic
+    -> begin
+    -> declare counofp int;
+    -> select count(age) into counofp from customer where customer.age =age;
+    -> return (countofp);
+    -> return (countofp);^C
+mysql> create function countof(age int)
+    -> return int
+    -> deterministic
+    -> begin
+    -> declare countofp int;
+    -> select count(age) into countofp from customer where customer.age= age;
+    -> returns (countofp);
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return int
+deterministic
+begin
+declare countofp int;
+select count(age) into coun' at line 2
+mysql> create function countof(age int)
+    -> returns int
+    -> deterministic
+    -> begin
+    -> declare countofp int;
+    -> select count(age) into countofp from customer where customer.age= age;
+    -> return (countofp);
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> select customer_firstname, count(56) from customer;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'bank_db.customer.customer_firstname'; this is incompatible with sql_mode=only_full_group_by
+mysql> select customer_firstname, countof(56) from customer;
++--------------------+-------------+
+| customer_firstname | countof(56) |
++--------------------+-------------+
+| Parul              |           5 |
+| Chitresh           |           5 |
+| Nisha              |           5 |
+| Abhishek           |           5 |
+| Shankar            |           5 |
++--------------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select countof(56);
++-------------+
+| countof(56) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> delimiter ;
+mysql> create function seniorCategory(age int)
+    -> returns int^C
+mysql> alter table customer add column category varchar(20) before address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'before address' at line 1
+mysql> alter table customer add column category varchar(20) after age;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+------+----------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | age  | category | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+------+----------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    |   56 | NULL     | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    |   56 | NULL     | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    |   56 | NULL     | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    |   56 | NULL     | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    |   56 | NULL     | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+------+----------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> delimiter //
+mysql> create function countof(age int)
+    -> deterministic
+    -> begin
+    -> IF age>55 THEN
+    -> ^C
+mysql> create function countof(age int)
+    -> returns varchar(20)
+    -> deterministic
+    -> begin
+    -> declare category varchar(20);
+    -> IF age>55 THEN
+    -> update customer set category = 'senior citizen';
+    -> ELSE
+    -> update customer set category = 'NA';
+    -> return (category);
+    -> end//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 11
+mysql> create function countof(age int)
+    -> returns int^C
+mysql> ^C
+mysql> create function seniorCitizen(age int)
+    -> returns int
+    -> deterministic
+    -> begin
+    -> update customer set category='senior citizen' where customer.age>age;
+    -> return (1);
+    -> end//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select seniorCitizen(55);
+    -> //
++-------------------+
+| seniorCitizen(55) |
++-------------------+
+|                 1 |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> delimiter ;
+mysql> select * from customer;
++-------------+--------------------+-------------------+------+------+----------------+---------+------------+--------------+
+| customer_id | customer_firstname | customer_lastname | sex  | age  | category       | address | phnumber   | adharcard_no |
++-------------+--------------------+-------------------+------+------+----------------+---------+------------+--------------+
+| CSS0000001  | Parul              | Gandhi            | F    |   56 | senior citizen | Delhi   | 7863452678 | 222233334444 |
+| CSS0000002  | Chitresh           | Kumar             | M    |   56 | senior citizen | Mumbai  | 7863234678 | 123433334444 |
+| CSS0000003  | Nisha              | Shankar           | F    |   56 | senior citizen | Mumbai  | 7812234678 | 123433674444 |
+| CSS0000004  | Abhishek           | Dutta             | M    |   56 | senior citizen | Mumbai  | 7812234612 | 123433677844 |
+| CSS0000005  | Shankar            | Nair              | M    |   56 | senior citizen | Mumbai  | 7342234612 | 453433677844 |
++-------------+--------------------+-------------------+------+------+----------------+---------+------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> create table transaction_log(serial_no int, transaction_code varchar(20) primary key, change_date timestamp);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create trigger after_transaction_insert
+    -> ^C
+mysql> drop table transaction_log;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table transaction_log(serial_no int auto increment primary key, transaction_code varchar(20), change_date timestamp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto increment primary key, transaction_code varchar(20), change_date timestamp)' at line 1
+mysql> create table transaction_log(serial_no int autoincrement primary key, transaction_code varchar(20), change_date timestamp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'autoincrement primary key, transaction_code varchar(20), change_date timestamp)' at line 1
+mysql> create table transaction_log(serial_no int auto_increment primary key, transaction_code varchar(20), change_date timestamp);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> delimiter //
+mysql> create trigger after_transaction_insert
+    -> after insert on transaction
+    -> for each row
+    -> begin
+    -> insert into transaction_log(transaction_code,change_date) values (new.transaction_code,now());
+    -> end //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> delimiter ;
+mysql> select * from transaction;
++------------------+--------------+--------------+---------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    |
++------------------+--------------+--------------+---------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 |
++------------------+--------------+--------------+---------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> insert into transaction values('TC000007','PC0000001','SC00000001','2021-1-1 21:10:40',35555555);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from transaction;
++------------------+--------------+--------------+---------------------+-----------+
+| transaction_code | product_code | service_code | dateOfTransaction   | volume    |
++------------------+--------------+--------------+---------------------+-----------+
+| TC000001         | PC0000001    | SC00000001   | 2021-11-16 19:32:18 |  60000000 |
+| TC000002         | PC0000001    | SC00000002   | 2021-12-28 21:21:30 |  87654433 |
+| TC000003         | PC0000001    | SC00000004   | 2021-12-29 18:16:34 | 788888888 |
+| TC000004         | PC0000002    | SC00000001   | 2021-12-27 15:16:34 |   7986554 |
+| TC000005         | PC0000002    | SC00000002   | 2021-11-16 23:10:49 | 366666666 |
+| TC000006         | PC0000003    | SC00000002   | 2021-11-18 13:52:18 | 608654400 |
+| TC000007         | PC0000001    | SC00000001   | 2021-01-01 21:10:40 |  35555555 |
++------------------+--------------+--------------+---------------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from transaction_log;
++-----------+------------------+---------------------+
+| serial_no | transaction_code | change_date         |
++-----------+------------------+---------------------+
+|         1 | TC000007         | 2023-11-21 11:48:45 |
++-----------+------------------+---------------------+
+1 row in set (0.00 sec)

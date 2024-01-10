@@ -1,0 +1,28 @@
+create foldr
+aa foldrinn thanne cmd
+type cmnd = npx create-react-app myfirstapp
+when enter(happy hackng kitum)
+>>>>
+in vscode(or code . in cmd)
+myfrst appp varum, athil
+src il. app.js. right click. open in intrgtd terminal. in powershell.'npm start'
+// used to create react app
+run = deploy
+deployed one server runs
+>>>>>
+public l-index.html ind-thats y,we see that page
+>>>>
+module= component based apps and func based(func = component)
+all things in src are components 
+component created by react default is app (is rendered first)
+how app component comes in index.html?(page load aavne)
+>>>
+in indx.js - root elmntil app render cheyum
+(app can be used like html tag)
+>>
+app.js=> in return chng content (inside a div)
+>>
+app.js(copy)=> il content ittat orgnlapp.jsil import cheyum
+(import React from 'react':in copy)
+>> case sentv
+>>compnt based and class based

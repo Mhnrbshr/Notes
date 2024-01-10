@@ -1,0 +1,101 @@
+SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, product.product_name
+FROM customer
+INNER JOIN account ON customer.customer_id = account.customer_id
+INNER JOIN product ON account.product_code = product.product_code
+WHERE product.product_name = 'Savings Account';
+
+
+SELECT customer.customer_id, customer.customer_firstname,customer.customer_lastname, service.service_name
+FROM customer
+INNER JOIN account ON customer.customer_id = account.customer_id
+INNER JOIN transaction ON account.product_code = transaction.product_code
+INNER JOIN service ON transaction.service_code = service.service_code
+WHERE customer.customer_firstname ='Parul';
+
+
+SELECT product.product_code, product.product_name, transaction.volume 
+FROM product 
+INNER JOIN transaction ON product.product_code = transaction.product_code 
+WHERE transaction.volume = (SELECT MAX(volume) FROM transaction);
+
+
+>> stored procedures::
+
+1)create procedure citycount (in city varchar(20) , out countofp int) select count(*) into countofp from customer where address=city;
+
+call citycount('Mumbai',@countofp); // callng from here, and out coming from prvs line of code
+ 
+select @countofp;   //mumbai aalkarde count print
+
+
+2)create procedure mumbaiCustomers(in city varchar(20)) select * from customer where address=city;
+
+call mumbaiCustomers('Mumbai');   //mumbai alkar details printng
+
+
+>> adding field
+
+alter table customer add column age int default 56 after sex;
+
+>>function
+
+1)delimiter //                           //semicoln use aakn vendi delimtr 
+create function countof(age int)
+returns int
+deterministic
+begin
+declare countofp int;
+select count(age) into countofp from customer where customer.age= age;
+return (countofp);
+end//
+
+select countof(56);           //calling function
+
+
+2)create function seniorCitizen(age int)
+    -> returns int
+    -> deterministic
+    -> begin
+    -> update customer set category='senior citizen' where customer.age>age;
+    -> return (1);
+    -> end//
+
+ select seniorCitizen(55);
+
+select * from customer;
+
+>>index     // to optimize searching  
+
+create index indx_firstname on customer(customer_firstname); // ipe frst name m inx aan
+show indexes from customer;     // now prmry key and frst name are indexes. so i=her we use indexes.
+ 
+>>defualt engine- innodb
+
+>>show table status like 'customer';  // custmr table mathrm status kanan
+
+>>show table status from bank_db;  // ella tables status kanan in bankdb
+
+>> profiling used to check the time taking to execute the query.
+
+set profiling = 1;
+then execute 2 3 queries. then
+show profiles;        //shows the duration to execute each query.
+
+
+
+show profiles;
++----------+------------+------------------------+
+| Query_ID | Duration   | Query                  |
++----------+------------+------------------------+
+|        1 | 0.00081925 | select * from customer |
+|        2 | 0.00251000 | select * from account  |
+|        3 | 0.00078300 | select * from product  |
++----------+------------+------------------------+
+
+>>repeated datas removr and form the table - 1nf
+remove partial depndncy - 2nf
+remove transitivity - 3nf
+
+>> INSERT INTO offices (state) VALUES (('CA'),('MA'),('NY'),(NULL),('Chiyoda-Ku'),(NULL),(NULL));
+
+>> ALTER TABLE office DROP COLUMN state;

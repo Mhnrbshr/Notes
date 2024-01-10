@@ -1,0 +1,24 @@
+nml chyna code coverg noka
+expectd outpt vs actual nokum
+testng indvl methds(classes)
+
+unit testng by developers
+
+by testng, we can know the input,dt,outpt and all
+oru method,vere sthlth refrnc vnnl.aa methd chng varthya,test chytha alrdy aryn patum mattodth pottunn
+test-indepndnt
+prepre input,cal mthd,chck outpt
+branch cvrg-all condtnsil nmde data pass avndon
+
+ARRng,act,assert -aaa structr
+act-involks methd
+act-access clss objct
+assrt-chck result
+
+setup- like constrctr
+teardown- like finally
+
+nunit-frmwrk of .net
+
+.net .test-give xml result-then we convert to report
+endpoint confgrtn of api-controllers

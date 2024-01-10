@@ -1,0 +1,319 @@
+framewrk by microsoft
+
+cross-platform == supports web, desktop, and mobile development
+ 
+.net divided into 3 based on evolutn== .net framwk,.net core,unified .net
+
+.net framewrk = build for windows based aplctns(libraries==mvc and asp.net was there)
+
+net core(softwr devlpmnt platfrm) = cross-platform,open source(its source code is publicly accessible),l8 w8,(asp.net and also entity frmwrk core==libraries)
+-multi languages are there
+-documentn
+
+
+FCL(frwmwrk class librry) == includes code for common task
+(eg: data access,ntwkng)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Console.WriteLine("Hello, World!");
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+CLR = JIT compiler + Garbg collctr + excutn engine
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+lamda func - one tym use functn can be done as lamda func
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Use HTTP requests (GET, POST) == to send data from the client side to the server side.
+
+GET: Requests data from a specified resource. Parameters are sent in the URL.
+POST: Submits data to be processed to a specified resource. Parameters are sent in the request body. 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+routing =  mapping btwn url and serverside action
+
+>>>>>>>.OFFLINE CLASSS
+
+console aplctn - cmd vech run chyna aplctn
+zamarin - to devlp mobl app using .net
+>>>>>>>>>.
+
+if follw a archtrc - avoid regression(previous wont break)
+
+>>>>DataType
+string datatype - immutable(eg: used in constatns){concantinatn using APPEND)
+
+string builder - mutable(changble)(uses same aocatd memory space when chnging){more performnc}
+>>>>>>>>>>>
+
+int.Parse(Console.ReadLine());             // INT.parse kodtha- int lot convrt aakum
+>>>>>>>>>>>
+in MVC = busnss comes in Controller
+M likes DB
+View
+>>>>>>>>>
+
+stafolding = min value product
+cors == error (when frnt to back integrats)[Cross Orgnal Resource Sharing]
+	
+internet information service == web server for hosting
+sdk =  source devplmnt kit(tools and librarties etc available)
+
+assigning VERSIONS to dfrnt releases.
+
+>>>>>>>
+Record(refer)=== not chngable(immutable)
+we can also check whether objcts are same
+
+
+structr =  value typ(call chyne oke copy aaykyrkum)
+class =  refrnc typ(copy alla.. chng varthya orgnl maarum)
+
+>>>>>>>
+return more than 1 value,other methods are there(out keywrd,tuple)
+validtn(do using method)
+default arguments in functn
+extensn mthds in func
+this keywrd
+seriaztn(objc to jsn sstrng)
+
+>>>>>>>DAY2
+
+EXTENSION
+
+ORU NAMESPACE il 2classes
+1st classile oru funct(this keywrd use aaknam aa functn prmtr opmm)
+2nd clssil.. 2ndclassobjct vech 1stclass funtcn vilikn pattum.
+
+>>>>>>
+structure - similr to class
+contains membrvrbls and functns
+(varble copies indakum BUT in class refrnc use cheyum{orgnl chng avula})
+
+enum - contain constants,cant chng value
+eg:  enum color{red,orgng}
+
+>>>>>>>
+COLLECTIONS: NONGENERIC AND GENERIC
+NONGENRIC - any type pf data
+eg: ArrayList list = new ArrayList();
+list.Add("Hello");
+list.Add(42);
+list.Add(3.14);      // consdr all as objct
+
+GENERIC- 
+eg: List<String> stringList = new ArrayList<>();
+stringList.add("Hello");
+///kodkne full string aayrkum
+
+>>>>>
+dictnry=keyunique
+
+>>>>>> // Convert ArrayList to array for sorting
+Student[] studentsArray = (Student[])studentsList.ToArray(typeof(Student));
+
+>>>>>
+OBJCT ORRIENTD PRGMNG
+class - skeltn
+
+polymrphs - overldng and overrdng
+encapsltn - access modfrs(publc,prvt..)
+inhrtnc
+abstrctn - abstrct class,interface
+
+abstrt class contains- ABSTRCT METHD AND ALLTHA MTHDS
+abstrc clssil objct creatn patla..
+abstrct mthdil name mathre patu(no body at all){but in VIRTUAL Methd, thulli body kodka== and also ovrrd chyth code korchoodi add aakam}
+
+intrfc - functn defn cheyaana patu, ethelum class implmnt aaknam body{used to multiple inhrtnc}
+
+>>>>>
+EG: ABSTRACT CLASS(no objct creatn)
+basic model phn+ camera
+EG: INTERFC
+basic templt of atm card
+this can be used by dfrnt companies(name etc can be chngd,templt will be same)
+
+>>>>>
+FILE OPERATIONS = 
+(memory stream)
+>>>PROTECTED accs mdfr = immdt child n mathrm accss cheynm
+
+>>>>>DAY3
+
+NAMESPACE = like CONTAINER, used to avoid ambiguity(confusn in clss names).
+ambiguity can be avoid by using full qualitied name.
+eg for fully qualifd name:: namespc.classname.mthdname
+
+>>>
+EXCPTN HANDLNG - 
+call stack - multple classes mulitple trys vilikne
+excptn - runtime error
+throw used to customly throw a excptn(alrdy olle allnd)
+
+excptn classne extend cheyum - 1st
+eg: throw new expctnname() //ape call aavum expctname func CATCH. Then catchil inhrtdlott pass aakum..
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            
+            ProcessData();   //call mthd 1st
+        }
+        catch (Exception ex) //4th
+        {
+           
+            Console.WriteLine("Error: " + ex.Message); //5th
+        }
+    }
+
+    static void ProcessData() //2nd
+    {
+        
+            throw new CustomException("An error occurred while processing data."); //3rd
+        
+ }
+
+public class CustomException : Exception        //6th  - excptn classne extnd chyna step 
+{
+    
+    public CustomException(string message) : base(message){ }
+   
+}
+
+>>>>>>
+Best practices  == logging(easy to find errors)
+>>>>>>
+partial class - content baaki venel vere clsil ezhtham.
+compiler combines them during compilation.
+>>>>>>
+
+sealed class = cannot be inherited
+restrict further modification or extension of a class.
+
+>>>>>
+VALIDATION OF STRING
+
+!string.IsNullOrWhiteSpace(userInput) && !userInput.Any(char.IsDigit)
+
+OR
+
+(userInput is string)
+
+>>>>>>DAY 4
+
+DEPENDNCY INJCTN = interface reltd(framewrk objc tharum = angne tharnel, prnj kodknam e contract vannal athinte resoltn e clss aanenn)
+
+expltn:: class imolmnts intrfc(norml)-then objct creatn vech use aakum
+but herE:: startup clsil resolutn prnj vekum.. then cls implmnts intrfc vann kzhyumbe aa startup vilikum. apo thanne frmwrk objc create cheyum.
+
+>>>>
+data interchng - JSON
+
+entity frm=eg:ORM(mappng objct to table)
+data put in objct-then insrt to table
+data from table put into objct-then we access
+
+>>>>>
+append one list to another list = AddRange  (eg:list1.AddRange(list2))
+
+>>>>
+IEnumerable and IQueryable
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SHINOY
+DAY1
+asp.net - components indakan
+webforms - web aplctns create cheyn
+run on server side 
+
+MVC--
+logics in CONTROLLER(contains classes that defn endpoints),contrllr contains functions
+front end is VIEW
+MODEL used to commnct btw cntrlr and view(classes represntng datasturctr used by api)
+
+Web api - no view(only model and contrllr),servc to fetch and display data,servc orriented archtrc
+
+wpf - to wndws aplctn develp
+wcf - servc orrtd archtr
+soap - simple objct access protocol
+
+entity framwrk - fetch data from db,maping of objct and table
+
+linq - used with entity frmwrk, to query data easly.
+
+ado.net - here excte queries.Similar to entity framewrk.
+
+ROUTING -- maps incmng rqst to contrllr actn.
+2 types (attrbrt based and convention based)
+
+MODEL BINDING - automcly bind incmng rqst data to paramtrs of contrllr.(data to be processed hold in model)
+
+MIDDLEWARE - pipeline of rqst and rspncs.
+
+DEPENDNCY INJCTN == done in dfrnt modules.decouplng.
+when class a accss smthng from class 2 using interfc- loosely coupld.
+eg:: interface IE(contains get methd), class A(body of get mthd here implmntd), class B
+class A implwmnts interface IE.
+class B wants to access methd get().
+IN 2 ways, we can access it ----1)classA a = new classA();
+                                   a.get()
+                                2)IE a= new classA();   //instnc of infrc creatd and get() called
+                                   a.get()
+2nd mthd is bettr,bcz loosely coupld.
+
+>>>>>
+authentication - checkng credentials valid or not
+autheriztion - giving authority to users based on role
+
+>>>>>HTTPS METHODS
+GET
+PUT - update
+POST - create
+DELETE
+
+>>>>>>>
+depndcny in pgm.cs
+how its used in controllr
+intrfc implemented by a servc
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DAY2
+servc intrfc agth modelname aan pass aakne
+
+FLOW--
+model
+intrfc = task name defntn
+servc = task implmnt from inrtfc
+contrllr = using servc, call functns in servc
+
+ROUTING == 2TYPES
+singleton = only one instance
+add scoped = dfrnt places use aakndavum oru interfc  - same objct
+add transiant = dfrnt placesil use aakndavum oru interfc - dfrnt instnc pass aavum.
+>>>>>>>
+
+ENTITY FRAMWRK - 2types
+1)database first approach(desgn db then form entities)
+2)code first approach(frst design entities and models,using context connct with db)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DAY3
+
+LAZY loading and EAGER loading
+EAGER loading - ornam load aakumbe vere table koodi load aakn pattum(INCLUDE keyword is used)[LOADING ENTITIES ALONG WITH MAIN METHOD]
+LAZY loading - ornam load akeett, athil ninn mattethine vilichala 2nd one load aavu.
+
+>>>>
+CODE FIRST APPROACH
+modelile entity base chyth table create aavum(db create aaknam,table thanne varum)
+
+migration- oro tym work cheyumbe varna updations like new table introduction
+
+2Comnds are there:: dotnet ef migrations add InitialCreate
+                    dotnet ef database update
+>>>>>>>
+INITIAL NON CHNGBLE properties storing called SEEDING(seedData method)-only one tym excutes.
+

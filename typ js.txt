@@ -1,0 +1,34 @@
+in javascript machine does not understand which type it is
+when there is only one array in api return there can be an error when we use map function.
+ 
+const typestring=(str:string="Hello")=>{
+    console.log(str);
+}
+typestring();
+ 
+str has a default value hello unless we pass something when calling
+:string sets the type of str.
+ 
+ 
+node is run time environment that helps javascript to be run on both server and client side.
+npm node package manager provides utilities that helps us to run javascript.
+ 
+in web application:
+client side and server side
+ 
+the computer that manages the data from other side is server.
+ 
+threding
+computers can only use serial processing-one process after another
+to mimic parallel processing we use threads
+each threads switch between each other to do this
+ 
+ 
+In java the main function is a thread
+ 
+In node there is event loop
+node is formulated above c++
+multi threaded languages are c++
+node is single threaded
+we are exposing only thread in node
+to make node multi threaded we use libraries ex:libuv
